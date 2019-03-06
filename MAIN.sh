@@ -35,3 +35,11 @@ bowtie2-build \
 -f --threads $CORES \
 $GENOME_FASTA \
 ${BASEDIR}/genome/hg38
+
+### aligning reads to genomic index
+
+# create directory to output alignments
+mkdir -p ${BASEDIR}/results/aligned
+
+# align reads
+
