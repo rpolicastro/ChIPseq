@@ -43,7 +43,7 @@ ${BASEDIR}/genome/hg38
 mkdir -p ${BASEDIR}/results/aligned
 
 # sample sheet aware read alignment
-python ${BASEDIR}/bin/alignReads.py \
+Rscript ${BASEDIR}/bin/alignReads.R \
 --outdir $BASEDIR \
 --seqdir $SEQDIR \
 --threads $CORES \
@@ -58,14 +58,14 @@ for SAM in ${BASEDIR}/results/aligned/*sam; do
 done
 for BAM in ${BASEDIR}/results/aligned/*bam; do samtools index $BAM; done
 
-## peak calling
-## ------------
+## peak calling and annotation
+## ---------------------------
 
 # creating directory to output peaks
 mkdir -p ${BASEDIR}/results/peaks
 
 # calling peaks
-python ${BASEDIR}/bin/callPeaks.py \
+Rscript ${BASEDIR}/bin/callPeaks.R \
 --outdir $BASEDIR \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET
