@@ -21,7 +21,7 @@ Before creating the environment, you must first install miniconda on your comput
 
 You are now read to create the virtual sofware environment, and download all software and dependencies. If you would like to recreate the environment used when writing the original workflow, navigate to the main repository directory and enter `conda create -f environment.yml`. If you would like to create your own environment with the latest software version, follow the steps below.
 
-1. Create the new environment and specify the software to include in it `conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 pandas r-getopt bioconductor-chipseeker bioconductor-rtracklayer bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene bioconductor-genomicranges`.
+1. Create the new environment and specify the software to include in it `conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt bioconductor-chipseeker bioconductor-rtracklayer bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene bioconductor-genomicranges`.
 2. Update the software to the latest compatible versions `conda update -n chipseq-automation -y -c conda-forge -c bioconda --all`.
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
@@ -76,4 +76,3 @@ This workflow would not be possible without the great software listed below.
 - [bedtools](https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html) - Bed file manipulation.
 - [deepTools](https://deeptools.readthedocs.io/en/develop/) - Read normalization and heatmap generation.
 - [ChIPseeker](http://bioconductor.org/packages/release/bioc/html/ChIPseeker.html) - Peak annotation.
-- [pandas](https://pandas.pydata.org/) - Dataframe manipulation.
