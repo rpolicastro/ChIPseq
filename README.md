@@ -26,7 +26,7 @@ You are now read to create the virtual sofware environment, and download all sof
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
 
-## Assembling Sample Sheet
+## Creating Sample Sheet
 
 In order to keep track of samples, this workflow requires the creation of a sample sheet. An example sheet 'samples.txt' is provided in the main directory. It is important to follow exact formatting of this sheet, as the information within it is used in various stages of the workflow.
 
@@ -65,7 +65,13 @@ If you wish to submit the workflow to a compute node, you can do so by submittin
 
 # Built With
 
+This workflow would not be possible without the great software listed below.
+
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) - Read quality control.
 - [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) - Short read aligner.
 - [Samtools](http://www.htslib.org/) - SAM/BAM manipulation.
 - [MACS](https://github.com/taoliu/MACS) - Peak caller.
+- [bedtools](https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html) - Bed file manipulation.
+- [deepTools](https://deeptools.readthedocs.io/en/develop/) - Read normalization and heatmap generation.
+- [ChIPseeker](http://bioconductor.org/packages/release/bioc/html/ChIPseeker.html) - Peak annotation.
+- [AnnotationHub](https://bioconductor.org/packages/release/bioc/html/AnnotationHub.html) - Retrieving organism and transcriptome databases.
