@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd $PBS_O_WORKDIR
-source SETTINGS.sh
+source SETTINGS
 
 #########################################
 ## ChIP-seq Analysis of Multiple Samples
@@ -16,7 +16,7 @@ source activate chipseq
 # creating directory to output fastqc results
 mkdir -p ${BASEDIR}/results/fastqc
 
-# saving fastq files variable
+# saving fastq file names to variable
 FASTQ_FILES=$(find ${SEQDIR} -name "*fastq")
 
 # running fastqc
@@ -41,5 +41,20 @@ ${BASEDIR}/genome/hg38
 # create directory to output alignments
 mkdir -p ${BASEDIR}/results/aligned
 
-# align reads
+# sample sheet aware read alignment
+python ${BASEDIR}/bin/alignReads.py \
+--outDir ${BASEDIR} \
+--threads $CORES \
+--sampleSheet $SAMPLE_SHEET
+
+# converting to coordinate sorted bam with index
+for SAM in ${BASEDIR}/results/aligned/*sam; do
+	samtools sort \
+	-O BAM -@ $CORES \
+	-o ${BASEDIR}/results/aligned/$(basename $SAM .sam).bam \
+	$SAM
+done
+for BAM in ${BASEDIR}/results/aligned/*bam; do samtools index $BAM; done
+
+### calling peaks with macs2
 

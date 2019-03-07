@@ -1,3 +1,3 @@
-sample_ID	condition	replicate	R1	R2	R1_control	R2_control	paired
-SS001	WT	1	WT_R1.fastq	WT_R2.fastq	WT_control_R1.fastq	WT_control_R2.fastq	paired
-SS002	KD	1	KD_R1.fastq	NA	KD_control_R1.fastq	NA	unpaired
+sample_ID	condition	replicate	R1	R2	control_ID	R1_control	R2_control	paired
+SS001	WT	1	WT_R1.fastq	WT_R2.fastq	control_1	WT_control_R1.fastq	WT_control_R2.fastq	paired
+SS002	KD	1	KD_R1.fastq	NA	control_1	WT_control_R1.fastq	NA	unpaired

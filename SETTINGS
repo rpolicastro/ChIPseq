@@ -1,6 +1,7 @@
 
 BASEDIR=''
 CORES=1
+SAMPLE_SHEET=''
 
 SEQDIR=''
 

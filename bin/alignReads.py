@@ -43,7 +43,7 @@ def align_controls(row):
                         'bowtie2',
                         '-x', os.path.join(args.outdir, 'genome', 'hg38'),
                         '-1', row['R1_control'], '-2', row['R2_control'],
-                        '-S', os.path.join(args.outdir, 'results', 'aligned', row['condition'] + '_' + row['replicate'] + '_control.sam'),
+                        '-S', os.path.join(args.outdir, 'results', 'aligned', row['control_ID'] + '.sam'),
                         '-q --phred33 --no-mixed --no-discordant --threads', args.threads
                 ]
                 subprocess.run(' '.join(command), shell=True, check=True)
@@ -51,8 +51,8 @@ def align_controls(row):
                 command = [
                         'bowtie2',
                         '-x', os.path.join(args.outdir, 'genome', 'hg38'),
-                        '-U', row['R1'],
-                        '-S', os.path.join(args.outdir, 'results', 'aligned', row['condition'] + '_' + row['replicate'] + '_control.sam'),
+                        '-U', row['R1_control'],
+                        '-S', os.path.join(args.outdir, 'results', 'aligned', row['control_ID'] + '.sam'),
                         '-q --phred33 --threads', args.threads
                 ]
                 subprocess.run(' '.join(command), shell=True, check=True)
@@ -61,5 +61,5 @@ def align_controls(row):
 
 samples = pd.read_csv(args.sampleSheet, sep='\t', header=0, index_col=False)
 samples.apply(align_experimental, axis=1)
-unique_controls = samples.drop_duplicates('R1_control', keep='first')
+unique_controls = samples.drop_duplicates('control_ID', keep='first')
 unique_controls.apply(align_controls, axis=1)
