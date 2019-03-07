@@ -55,3 +55,17 @@ The last step is to set a few settings in the 'settings.conf' file in the main d
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
 | SEQDIR | The directory containing the fastq files. |
 | GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome.fasta) |
+
+## Running the Workflow
+
+After getting the conda environment ready, the sample sheet prepared, and the settings specified, you are now ready to run the workflow. Navigate to the main directory and enter 'bash main.sh'.
+
+###### Notes for IU Folks
+If you wish to submit the workflow to a compute node, you can do so by submitting it through the TORQUE resource manager `qsub -l nodes=1:ppn=8,vmem=64gb,walltime=12:00:00 main.sh`. 'ppn' specifies the threads, and 'vmem' is the virtual memory.
+
+# Built With
+
+- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) - Read quality control.
+- [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) - Short read aligner.
+- [Samtools](http://www.htslib.org/) - SAM/BAM manipulation.
+- [MACS](https://github.com/taoliu/MACS) - Peak caller.
