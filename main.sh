@@ -9,7 +9,7 @@ source settings.conf
 
 ### loading conda environment
 
-source activate chipseq
+source activate chipseq-automation
 
 ### fastqc of reads
 

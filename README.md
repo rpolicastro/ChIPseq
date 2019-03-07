@@ -5,6 +5,8 @@ Automation of ChIP-seq Workflow
 
 This repository will use software in a conda virtual environment to process multiple ChIP-seq samples. Before preceding make sure you have your conda environment installed, and the settings properly set in the 'settings.conf' file.
 
+# Getting Started
+
 ## Preparing Conda Environment
 
 This workflow takes advantage of the [conda](https://conda.io/en/latest/) package manager and virtual environment. The conda package manager installs both the main software and all dependencies into a 'virtual environment' to ensure compatabilty. Furthermore, the provided 'environment.yml' file will reproduce the software environment used when developing the workflow. This ensures prolonged compatabilty and reproducibility.
@@ -19,3 +21,21 @@ You are now read to create the virtual sofware environment, and download all sof
 2. Update the software to the latest compatible versions `conda update -n chipseq-automation -y -c conda-forge -c bioconda --all`.
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
+
+## Assembling Sample Sheet
+
+In order to keep track of samples, this workflow requires the creation of a sample sheet. An example sheet 'samples.txt' is provided in the main directory. It is important to follow exact formatting of this sheet, as the information within it is used in various stages of the workflow.
+
+| Column | Description |
+| ------ | ----------- |
+| sample_ID | Short sample identifier (e.g. A001). |
+| condition | Experimental condition (e.g. EWSR1_KD). |
+| replicate | Sample replicate number (e.g. 1). |
+| R1 | Name of R1 fastq file of experimental condition. |
+| R2 | Name of R2 fastq file of experimental condition (put NA if single end). |
+| control_ID | Unique identifier for input/control sample (e.g. KD_input_1). |
+| R1_control | Name of R1 fastq of input/control. |
+| R2_control | Name of R2 fastq of input/control (put NA if single end). |
+| paired | Put 'paired' or 'unpaired' depending on the run. |
+
+After creating the sample sheet, set the path and file name in the 'settings.conf' file.
