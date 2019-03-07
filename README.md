@@ -55,6 +55,8 @@ The last step is to set a few settings in the 'settings.conf' file in the main d
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
 | SEQDIR | The directory containing the fastq files. |
 | GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome.fasta) |
+| UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000) |
+| DOWNSTREAM | Bases downstream of TSS for defining promoter (e.g. 1000) |
 
 ## Running the Workflow
 

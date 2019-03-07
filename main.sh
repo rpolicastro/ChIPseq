@@ -72,4 +72,6 @@ python ${BASEDIR}/bin/callPeaks.py \
 
 # annotating peaks
 Rscript ${BASEDIR}/bin/peakAnno.R \
--o ${BASEDIR} \
+-o $BASEDIR \
+-u $UPSTREAM \
+-d $DOWNSTREAM
