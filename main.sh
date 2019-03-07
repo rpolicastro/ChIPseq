@@ -43,9 +43,10 @@ mkdir -p ${BASEDIR}/results/aligned
 
 # sample sheet aware read alignment
 python ${BASEDIR}/bin/alignReads.py \
---outDir ${BASEDIR} \
+--outdir $BASEDIR \
+--seqdir $SEQDIR \
 --threads $CORES \
---sampleSheet $SAMPLE_SHEET
+--samplesheet $SAMPLE_SHEET
 
 # converting to coordinate sorted bam with index
 for SAM in ${BASEDIR}/results/aligned/*sam; do
@@ -63,6 +64,6 @@ mkdir -p ${BASEDIR}/results/peaks
 
 # calling peaks
 python ${BASEDIR}/bin/callPeaks.py \
---outDir ${BASEDIR} \
+--outdir $BASEDIR \
 --threads $CORES \
---sampleSheet $SAMPLE_SHEET
+--samplesheet $SAMPLE_SHEET
