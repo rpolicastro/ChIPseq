@@ -7,6 +7,10 @@ This repository will use software in a conda virtual environment to process mult
 
 # Getting Started
 
+## Cloning Repo
+
+To get started, you must first clone the ChIPseq automation repository. Navigate to a directory you would like to clone the rep to and enter `git clone https://github.com/rpolicastro/ChIPseq.git`.
+
 ## Preparing Conda Environment
 
 This workflow takes advantage of the [conda](https://conda.io/en/latest/) package manager and virtual environment. The conda package manager installs both the main software and all dependencies into a 'virtual environment' to ensure compatabilty. Furthermore, the provided 'environment.yml' file will reproduce the software environment used when developing the workflow. This ensures prolonged compatabilty and reproducibility.
@@ -15,9 +19,9 @@ Before creating the environment, you must first install miniconda on your comput
 1. [Install miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html?highlight=conda), and make sure that conda is in your PATH.
 2. Update conda to the latest version `conda update conda`.
 
-You are now read to create the virtual sofware environment, and download all software and dependencies.
+You are now read to create the virtual sofware environment, and download all software and dependencies. If you would like to recreate the environment used when writing the original workflow, navigate to the main repository directory and enter `conda create -f environment.yml`. If you would like to create your own environment with the latest software version, follow the steps below.
 
-1. Create the environment and specify the software to include in it `conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 pandas`.
+1. Create the new environment and specify the software to include in it `conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 pandas`.
 2. Update the software to the latest compatible versions `conda update -n chipseq-automation -y -c conda-forge -c bioconda --all`.
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
@@ -39,3 +43,15 @@ In order to keep track of samples, this workflow requires the creation of a samp
 | paired | Put 'paired' or 'unpaired' depending on the run. |
 
 After creating the sample sheet, set the path and file name in the 'settings.conf' file.
+
+## Specifying Run Settings
+
+The last step is to set a few settings in the 'settings.conf' file in the main directory.
+
+| Setting | Description |
+| ------- | ----------- |
+| BASEDIR | The output directory for the workflow results. |
+| CORES | The number of CPU cores/threads. |
+| SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
+| SEQDIR | The directory containing the fastq files. |
+| GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome.fasta) |
