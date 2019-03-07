@@ -58,3 +58,11 @@ for BAM in ${BASEDIR}/results/aligned/*bam; do samtools index $BAM; done
 
 ### calling peaks with macs2
 
+# creating directory to output peaks
+mkdir -p ${BASEDIR}/results/peaks
+
+# calling peaks
+python ${BASEDIR}/bin/callPeaks.py \
+--outDir ${BASEDIR} \
+--threads $CORES \
+--sampleSheet $SAMPLE_SHEET
