@@ -7,11 +7,13 @@ source settings.conf
 ## ChIP-seq Analysis of Multiple Samples
 #########################################
 
-### loading conda environment
+## loading conda environment
+## -------------------------
 
 source activate chipseq-automation
 
-### fastqc of reads
+## fastqc of reads
+## ---------------
 
 # creating directory to output fastqc results
 mkdir -p ${BASEDIR}/results/fastqc
@@ -25,7 +27,8 @@ fastqc \
 -o ${BASEDIR}/results/fastqc \
 $FASTQ_FILES
 
-### generating bowtie2 index
+## bowtie 2 read alignment
+## -----------------------
 
 # create directory for genomic index
 mkdir -p ${BASEDIR}/genome
@@ -35,8 +38,6 @@ bowtie2-build \
 -f --threads $CORES \
 $GENOME_FASTA \
 ${BASEDIR}/genome/hg38
-
-### aligning reads to genomic index
 
 # create directory to output alignments
 mkdir -p ${BASEDIR}/results/aligned
@@ -57,7 +58,8 @@ for SAM in ${BASEDIR}/results/aligned/*sam; do
 done
 for BAM in ${BASEDIR}/results/aligned/*bam; do samtools index $BAM; done
 
-### calling peaks with macs2
+## peak calling
+## ------------
 
 # creating directory to output peaks
 mkdir -p ${BASEDIR}/results/peaks
@@ -67,3 +69,7 @@ python ${BASEDIR}/bin/callPeaks.py \
 --outdir $BASEDIR \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET
+
+# annotating peaks
+Rscript ${BASEDIR}/bin/peakAnno.R \
+-o ${BASEDIR} \
