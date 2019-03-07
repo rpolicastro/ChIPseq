@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd $PBS_O_WORKDIR
-source SETTINGS
+source settings.conf
 
 #########################################
 ## ChIP-seq Analysis of Multiple Samples
