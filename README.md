@@ -22,14 +22,14 @@ Before creating the environment, you must first install miniconda.
 You are now read to create the virtual sofware environment, and download all software and dependencies. If you would like to recreate the environment used when writing the original workflow, navigate to the main repository directory and enter `conda create -f environment.yml`. If you would like to create your own environment with the latest software versions, follow the steps below.
 
 1. Create the new environment and specify the software to include in it.
-```bash
+```
 conda create -n chipseq-automation -y -c conda-forge -c bioconda \
 fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt \
 bioconductor-chipseeker bioconductor-rtracklayer bioconductor-genomicranges\
 bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene
 ```
 2. Update the software to the latest compatible versions.
-```bash
+```
 conda update -n chipseq-automation -y -c conda-forge -c bioconda --all
 ```
 
