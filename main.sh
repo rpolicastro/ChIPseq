@@ -42,7 +42,7 @@ ${BASEDIR}/genome/hg38
 # create directory to output alignments
 mkdir -p ${BASEDIR}/results/aligned
 
-# sample sheet aware read alignment
+# read alignment
 Rscript ${BASEDIR}/bin/alignReads.R \
 --outdir $BASEDIR \
 --seqdir $SEQDIR \
@@ -70,8 +70,21 @@ Rscript ${BASEDIR}/bin/callPeaks.R \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET
 
+# creating directory to output annotated peak files
+mkdir -p ${BASEDIR}/results/annotated_peaks
+
 # annotating peaks
 Rscript ${BASEDIR}/bin/peakAnno.R \
--o $BASEDIR \
--u $UPSTREAM \
--d $DOWNSTREAM
+--outdir $BASEDIR \
+--upstream $UPSTREAM \
+--downstream $DOWNSTREAM
+
+## bam to bigwig
+## -------------
+
+# creating directory to output bigwigs
+mkdir -p ${BASEDIR}/results/bigwigs
+
+# converting bams to bigwigs
+Rscript ${BASEDIR}/bin/bamToBigwig.R --outdir $BASEDIR
+

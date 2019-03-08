@@ -20,46 +20,50 @@ opt         <-  parse_args(opt_parser)
 ## ---------
 
 align.experimental <- function(row) {
+	# getting command ready
+	command <- paste(
+		"bowtie2",
+		"-x", file.path(opt$outdir, "genome", "hg38"),
+		"-1", file.path(opt$seqdir, row["R1"]),
+		"-2", file.path(opt$seqdir, row["R2"]),
+		"-S", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
+		"-q --phred33 --no-unal --threads", opt$threads
+	)
+	# adding paired versus unpaired options
 	if (row["paired"] == "paired") {
-		command <- paste(
-			"bowtie2",
-			"-x", file.path(opt$outdir, "genome", "hg38"),
-			"-1", file.path(opt$seqdir, row['R1']),
-			"-2", file.path(opt$seqdir, row['R2']),
-			"-S", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
-			"-q --phred33 --no-mixed --no-discordant --threads", opt$threads
+		command <- paste(command,
+			"-1", file.path(opt$seqdir, row["R1"]),
+			"-2", file.path(opt$seqdir, row["R2"]),
+			"--no-mixed --no-discordant"
 		)
 	} else {
-		command <- paste(
-                        "bowtie2",
-                        "-x", file.path(opt$outdir, "genome", "hg38"),
-                        "-U", file.path(opt$seqdir, row['R1']),
-                        "-S", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
-                        "-q --phred33 --threads", opt$threads
-		)
+		command <- paste(command, "-U", file.path(opt$seqdir, row["R1"])
 	}
+	# submitting command
 	system(command)
 }
 
 align.control <- function(row) {
-        if (row["paired"] == "paired") {
-                command <- paste(
-                        "bowtie2",
-                        "-x", file.path(opt$outdir, "genome", "hg38"),
-                        "-1", file.path(opt$seqdir, row['R1_control']),
-                        "-2", file.path(opt$seqdir, row['R2_control']),
-                        "-S", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".sam")),
-                        "-q --phred33 --no-mixed --no-discordant --threads", opt$threads
-                )
-        } else {
-                command <- paste(
-                        "bowtie2",
-                        "-x", file.path(opt$outdir, "genome", "hg38"),
-                        "-U", file.path(opt$seqdir, row['R1_control']),
-                        "-S", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".sam")),
-                        "-q --phred33 --threads", opt$threads
-                )
-        }
+	# getting command ready
+	command <- paste(
+		"bowtie2",
+		"-x", file.path(opt$outdir, "genome", "hg38"),
+		"-1", file.path(opt$seqdir, row['R1_control']),
+		"-2", file.path(opt$seqdir, row['R2_control']),
+		"-S", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".sam")),
+		"-q --phred33 --no-unal --threads", opt$threads
+	)
+	# adding paired versus unpaired options
+	if (row["paired"] == "paired") {
+		command <- paste(command,
+			"-1", file.path(opt$seqdir, row["R1_control"]),
+			"-2", file.path(opt$seqdir, row["R2_control"]),
+			"--no-mixed --no-discordant"
+		)
+	} else {
+		command <- paste(command, "-U", file.path(opt$seqdir, row['R1_control']))
+	}
+	# submitting command
         system(command)
 }
 

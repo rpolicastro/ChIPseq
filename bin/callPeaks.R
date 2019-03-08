@@ -19,23 +19,18 @@ opt         <-  parse_args(opt_parser)
 ## ---------
 
 call.peaks <- function(row) {
+	command <- paste(
+		"macs2 callpeak",
+		"-t", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
+		"-c", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".bam")),
+		"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
+		"-o", file.path(opt$outdir, "results", "peaks"),
+		"-g 2913022398"
+	)
 	if (row["paired"] == "paired") {
-		command <- paste(
-			"macs2 callpeak",
-			"-t", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
-			"-c", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".bam")),
-			"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
-			"-o", file.path(opt$outdir, "results", "peaks"),
-			"-f BAMPE -g 3e9"
-		)
+		command <- paste(command, "-f BAMPE") {
 	} else {
-		command <- paste(
-			"macs2 callpeak",
-			"-t", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
-			"-c", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".bam")),
-			"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
-			"-o", file.path(opt$outdir, "results", "peaks"),
-			"-f BAM -g 3e9"
+		command <- paste(command, "-f BAM")
 	}
 	system(command)
 }
