@@ -28,7 +28,10 @@ fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt \
 bioconductor-chipseeker bioconductor-rtracklayer bioconductor-genomicranges\
 bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene
 ```
-2. Update the software to the latest compatible versions `conda update -n chipseq-automation -y -c conda-forge -c bioconda --all`.
+2. Update the software to the latest compatible versions.
+```
+conda update -n chipseq-automation -y -c conda-forge -c bioconda --all
+```
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
 
