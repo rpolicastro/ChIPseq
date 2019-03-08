@@ -3,7 +3,7 @@ Automation of ChIP-seq Workflow
 
 ## About
 
-This repository will use software in a conda virtual environment to process multiple ChIP-seq samples. Before preceding make sure you have your conda environment installed, and the settings properly set in the 'settings.conf' file.
+This repository will use software in a conda virtual environment to process multiple ChIP-seq samples. Before proceeding make sure you have your conda environment installed, and the settings properly set in the 'settings.conf' file.
 
 # Getting Started
 
@@ -21,7 +21,10 @@ Before creating the environment, you must first install miniconda on your comput
 
 You are now read to create the virtual sofware environment, and download all software and dependencies. If you would like to recreate the environment used when writing the original workflow, navigate to the main repository directory and enter `conda create -f environment.yml`. If you would like to create your own environment with the latest software version, follow the steps below.
 
-1. Create the new environment and specify the software to include in it `conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt bioconductor-chipseeker bioconductor-rtracklayer bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene bioconductor-genomicranges`.
+1. Create the new environment and specify the software to include in it.
+```
+conda create -n chipseq-automation -y -c conda-forge -c bioconda fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt bioconductor-chipseeker bioconductor-rtracklayer bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene bioconductor-genomicranges
+```
 2. Update the software to the latest compatible versions `conda update -n chipseq-automation -y -c conda-forge -c bioconda --all`.
 
 If you wish to use any of the software in the environment outside of the workflow you can type `conda activate chipseq-automation`. You can deactivate the environment by closing your terminal or entering `conda deactivate`.
