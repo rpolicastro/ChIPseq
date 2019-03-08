@@ -23,8 +23,8 @@ You are now read to create the virtual sofware environment, and download all sof
 
 1. Create the new environment and specify the software to include in it.
 ```
-conda create -n chipseq-automation -y -c conda-forge -c \
-bioconda fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt \
+conda create -n chipseq-automation -y -c conda-forge -c bioconda \
+fastqc bowtie2 samtools macs2 deeptools bedtools r-dplyr r-getopt \
 bioconductor-chipseeker bioconductor-rtracklayer bioconductor-genomicranges\
 bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene
 ```
