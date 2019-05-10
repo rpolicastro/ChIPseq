@@ -22,14 +22,12 @@ align.experimental <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", file.path(opt$outdir, "genome", "hg38"),
-		"-1", file.path(opt$seqdir, row["R1"]),
-		"-2", file.path(opt$seqdir, row["R2"]),
-		"-S", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
+		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-S", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options
-	if (row["paired"] == "paired") {
+	if (!is.na(row["R2"])) {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1"]),
 			"-2", file.path(opt$seqdir, row["R2"]),
@@ -46,21 +44,19 @@ align.control <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", file.path(opt$outdir, "genome", "hg38"),
-		"-1", file.path(opt$seqdir, row['R1_control']),
-		"-2", file.path(opt$seqdir, row['R2_control']),
-		"-S", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".sam")),
+		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-S", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options
-	if (row["paired"] == "paired") {
+	if (!is.na(row["R2_control"])) {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1_control"]),
 			"-2", file.path(opt$seqdir, row["R2_control"]),
 			"--no-mixed --no-discordant"
 		)
 	} else {
-		command <- paste(command, "-U", file.path(opt$seqdir, row['R1_control']))
+		command <- paste(command, "-U", file.path(opt$seqdir, row["R1_control"]))
 	}
 	# submitting command
         system(command)
@@ -69,9 +65,9 @@ align.control <- function(row) {
 ## aligning reads
 ## --------------
 
-sample.sheet <- read.table(file.path(opt$outdir, opt$samplesheet), sep="\t", header=T)
+sample.sheet <- read.table(opt$samplesheet, sep="\t", header=T, stringsAsFactors=FALSE)
 apply(sample.sheet, 1, align.experimental)
 unique.controls <- sample.sheet %>%
-	select(control_ID, R1_control, R2_control, paired) %>%
+	select(control_ID, R1_control, R2_control) %>%
 	distinct(control_ID, .keep_all=TRUE)
 apply(unique.controls, 1, align.control)

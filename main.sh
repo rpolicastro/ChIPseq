@@ -52,11 +52,11 @@ $GENOME_FASTA \
 ${OUTDIR}/genome/index/hg38
 
 # create directory to output alignments
-mkdir -p ${BASEDIR}/results/aligned
+mkdir -p ${OUTDIR}/aligned
 
 # read alignment
 Rscript ${BASEDIR}/bin/alignReads.R \
---outdir $BASEDIR \
+--outdir ${OUTDIR}/aligned \
 --seqdir $SEQDIR \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET
