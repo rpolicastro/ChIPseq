@@ -85,3 +85,4 @@ This workflow would not be possible without the great software listed below.
 - [bedtools](https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html) - Bed file manipulation.
 - [deepTools](https://deeptools.readthedocs.io/en/develop/) - Read normalization and heatmap generation.
 - [ChIPseeker](http://bioconductor.org/packages/release/bioc/html/ChIPseeker.html) - Peak annotation.
+- [Tidyverse](https://www.tidyverse.org/) - Data manipulation and visualization in R.
