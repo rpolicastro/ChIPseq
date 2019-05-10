@@ -12,6 +12,18 @@ source settings.conf
 
 source activate chipseq-automation
 
+## download files from SRA if necessary
+## ------------------------------------
+
+# creating sequence directory
+mkdir -p $SEQDIR
+
+# downloading from SRA if necessary
+Rscript ${BASEDIR}/bin/getSRA.R \
+--download $DOWNLOAD \
+--samplesheet $SAMPLE_SHEET \
+--seqdir $SEQDIR
+
 ## fastqc of reads
 ## ---------------
 

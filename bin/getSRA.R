@@ -6,14 +6,13 @@ library("dplyr")
 ## command line arguments
 ## ----------------------
 
-option.list <- list(
-	make_option("--download", actions="store", type="character", help="download files from SRA? [TRUE,FALSE]")
-	make_option("--samplesheet", actions="store", type="character", help="required sample sheet"),
-	make_option("--seqdir", acitons="store", type="character", help="directory with fastq files")
-)
+options <- matrix(c(
+	"download", "d", 1, "character", "download files from SRA? [TRUE,FALSE]",
+	"samplesheet", "i", 1, "character", "required sample sheet",
+	"seqdir", "o", 1, "character", "directory to download fastq files to"
+), byrow=TRUE, ncol=5)
 
-opt_parser  <-  OptionParser(option_list=option_list)
-opt         <-  parse_args(opt_parser)
+opt <- getopt(options)
 
 ## grabbing files
 ## --------------
@@ -26,7 +25,7 @@ if (opt$download == "TRUE") {
 	samples <- substr(samples, 1, nchar(samples)-6)
 
 	# downloading files
-	setwd(seqdir)
+	setwd(opt$seqdir)
 	for (sample in samples) {
 		command <- paste("fastq-dump", sample)
 		system(command)
