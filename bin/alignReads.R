@@ -6,15 +6,14 @@ library("dplyr")
 ## command line arguments
 ## ----------------------
 
-option.list <- list(
-	make_option(c("-o", "--outdir"), actions="store", type="character", default=getwd(), help="output directory"),
-	make_option("--threads", actions="store", type="numeric", default=1, help="number of CPU cores"),
-	make_option("--samplesheet", actions="store", type="character", help="required sample sheet"),
-	make_option("--seqdir", acitons="store", type="character", help="directory with fastq files")
-)
+options <- matrix(c(
+	"outdir", "d", 1, "character", "output directory",
+	"samplesheet", "s", 1, "character", "required sample sheet",
+	"seqdir", "o", 1, "character", "directory with fastq files",
+	"threads", "t", 1, "integer", "number of CPU cores"
+), byrow=TRUE, ncol=5)
 
-opt_parser  <-  OptionParser(option_list=option_list)
-opt         <-  parse_args(opt_parser)
+opt <- getopt(options)
 
 ## functions
 ## ---------
