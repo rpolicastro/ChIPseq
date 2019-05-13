@@ -10,7 +10,7 @@ options <- matrix(c(
 	"outdir", "d", 1, "character", "output directory",
 	"samplesheet", "s", 1, "character", "required sample sheet",
 	"seqdir", "o", 1, "character", "directory with fastq files",
-	"threads", "t", 1, "integer", "number of CPU cores",
+	"threads", "t", 1, "integer", "number of CPU cores"
 ), byrow=TRUE, ncol=5)
 
 opt <- getopt(options)
