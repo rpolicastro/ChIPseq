@@ -45,11 +45,10 @@ In order to keep track of samples, this workflow requires the creation of a samp
 | condition | Experimental condition (e.g. EWSR1_KD). |
 | replicate | Sample replicate number (e.g. 1). |
 | R1 | Name of R1 fastq file of experimental condition. |
-| R2 | Name of R2 fastq file of experimental condition (put NA if single end). |
-| control_ID | Unique identifier for input/control sample (e.g. KD_input_1). |
+| R2 | Name of R2 fastq file of experimental condition (leave blank if single end). |
+| control_ID | Name of input/control sample (e.g. KD_input_1). |
 | R1_control | Name of R1 fastq of input/control. |
-| R2_control | Name of R2 fastq of input/control (put NA if single end). |
-| paired | Put 'paired' or 'unpaired' depending on the run. |
+| R2_control | Name of R2 fastq of input/control (leave blank if single end). |
 
 After creating the sample sheet, set the path and file name in the 'settings.conf' file.
 
@@ -59,9 +58,11 @@ The last step is to set a few settings in the 'settings.conf' file in the main r
 
 | Setting | Description |
 | ------- | ----------- |
-| BASEDIR | The output directory for the workflow results. |
+| BASEDIR | The directory for the ChIPseq repository. |
+| OUTDIR | The output directory for the workflow results. |
 | CORES | The number of CPU cores/threads. |
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
+| DOWNLOAD | Whether the files need to be downloaded from SRA (e.g.'TRUE'). |
 | SEQDIR | The directory containing the fastq files. |
 | GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome.fasta) |
 | UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000) |
