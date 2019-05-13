@@ -56,11 +56,10 @@ mkdir -p ${OUTDIR}/aligned
 
 # read alignment
 Rscript ${BASEDIR}/bin/alignReads.R \
---outdir ${OUTDIR}/aligned \
+--outdir $OUTDIR \
 --seqdir $SEQDIR \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET \
---genomedir ${OUTDIR}/genome/index/hg38
 
 # converting to coordinate sorted bam with index
 for SAM in ${OUTDIR}/aligned/*sam; do
@@ -75,11 +74,11 @@ for BAM in ${OUTDIR}/aligned/*bam; do samtools index $BAM; done
 ## ---------------------------
 
 # creating directory to output peaks
-mkdir -p ${BASEDIR}/results/peaks
+mkdir -p ${OUTDIR}/peaks
 
 # calling peaks
 Rscript ${BASEDIR}/bin/callPeaks.R \
---outdir $BASEDIR \
+--outdir $OUTDIR \
 --threads $CORES \
 --samplesheet $SAMPLE_SHEET
 
@@ -88,7 +87,7 @@ mkdir -p ${BASEDIR}/results/annotated_peaks
 
 # annotating peaks
 Rscript ${BASEDIR}/bin/peakAnno.R \
---outdir $BASEDIR \
+--outdir $OUTDIR \
 --upstream $UPSTREAM \
 --downstream $DOWNSTREAM
 
@@ -96,8 +95,8 @@ Rscript ${BASEDIR}/bin/peakAnno.R \
 ## -------------
 
 # creating directory to output bigwigs
-mkdir -p ${BASEDIR}/results/bigwigs
+mkdir -p ${OUTDIR}/bigwigs
 
 # converting bams to bigwigs
-Rscript ${BASEDIR}/bin/bamToBigwig.R --outdir $BASEDIR
+Rscript ${BASEDIR}/bin/bamToBigwig.R --outdir $OUTDIR
 

@@ -11,7 +11,6 @@ options <- matrix(c(
 	"samplesheet", "s", 1, "character", "required sample sheet",
 	"seqdir", "o", 1, "character", "directory with fastq files",
 	"threads", "t", 1, "integer", "number of CPU cores",
-	"genomedir", "g", 1, "character", "bowtie2 genome index"
 ), byrow=TRUE, ncol=5)
 
 opt <- getopt(options)
@@ -23,8 +22,8 @@ align.experimental <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", opt$genomedir,
-		"-S", file.path(opt$outdir, paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
+		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-S", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options
@@ -45,8 +44,8 @@ align.control <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", opt$genomedir,
-		"-S", file.path(opt$outdir, paste0(row["control_ID"], ".sam")),
+		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-S", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options

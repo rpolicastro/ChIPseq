@@ -6,14 +6,13 @@ library("dplyr")
 ## command line arguments
 ## ----------------------
 
-option.list <- list(
-	make_option(c("-o", "--outdir"), actions="store", type="character", default=getwd(), help="output directory"),
-	make_option("--threads", actions="store", type="numeric", default=1, help="number of CPU cores"),
-	make_option("--samplesheet", actions="store", type="character", help="required sample sheet"),
-)
+options <- matrix(c(
+	"outdir", "o", 1, "character", "output directory",
+	"threads", "t", 1, "integer", "number of CPU cores",
+	"samplesheet", "s", 1, "character", "required sample sheet"
+), byrow=TRUE, ncol=5)
 
-opt_parser  <-  OptionParser(option_list=option_list)
-opt         <-  parse_args(opt_parser)
+opt <- getopt(options)
 
 ## functions
 ## ---------
@@ -21,17 +20,21 @@ opt         <-  parse_args(opt_parser)
 call.peaks <- function(row) {
 	command <- paste(
 		"macs2 callpeak",
-		"-t", file.path(opt$outdir, "results", "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
-		"-c", file.path(opt$outdir, "results", "aligned", paste0(row["control_ID"], ".bam")),
+		"-t", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
 		"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
-		"-o", file.path(opt$outdir, "results", "peaks"),
+		"-o", file.path(opt$outdir, "peaks"),
 		"-g 2913022398"
 	)
-	if (row["paired"] == "paired") {
+	if (!is.na(row["R2"])) {
 		command <- paste(command, "-f BAMPE") {
 	} else {
 		command <- paste(command, "-f BAM")
 	}
+
+	if (!is.na(row["control_ID")) {
+		command <- paste(command, "-c", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".bam")))
+	}
+	
 	system(command)
 }
 
