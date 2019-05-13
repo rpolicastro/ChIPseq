@@ -6,6 +6,7 @@ library("ChIPseeker")
 library("rtracklayer")
 library("org.Hs.eg.db")
 library("TxDb.Hsapiens.UCSC.hg38.knownGene")
+library("dplyr")
 
 ## command line arguments
 ## ----------------------
@@ -22,7 +23,7 @@ opt <- getopt(options)
 ## ---------------
 
 # ensure the extra columns in the macs2 narrowpeaks are carried over
-extraCols_narrowPeak  <-  c(signal.value = "numeric", p.value = "numeric", q.value = "numeric", peak = "integer")
+extraCols_narrowPeak  <-  c(signal.value = "numeric", p.value.negLog10 = "numeric", q.value.negLog10 = "numeric", peak = "integer")
 
 # go through each narrowpeaks file and annotate the peaks
 for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak")) {
@@ -34,12 +35,12 @@ for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak
 		tssRegion=c(-opt$upstream, opt$downstream),
 		TxDb=TxDb.Hsapiens.UCSC.hg38.knownGene,
 		level="transcript",
-		samestrand=FALSE
-		annoDb="org.Hs.eg.db",
+		sameStrand=FALSE,
+		annoDb="org.Hs.eg.db"
 	)
 	
 	# exporting some of the handy ChIPseeker graphs
-	pdf(file.path(opt$outdir, "peaks_annotated", paste0(tools::file_path_sans_ext(basename(file)), ".pdf"))
+	pdf(file.path(opt$outdir, "annotated_peaks", paste0(tools::file_path_sans_ext(basename(file)), ".pdf")))
 	plotAnnoPie(annotated)
 	plotAnnoBar(annotated)
 	plotDistToTSS(annotated)
@@ -49,7 +50,7 @@ for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak
 	annotated  <- as.data.frame(annotated)
 	write.table(
 		annotated,
-		file.path(opt$outdir, "results", "peaks_annotated", paste0(tools::file_path_sans_ext(basename(file)), ".tsv")),
+		file.path(opt$outdir, "annotated_peaks", paste0(tools::file_path_sans_ext(basename(file)), ".tsv")),
 		sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE, na=""
 	)
 }

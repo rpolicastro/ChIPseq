@@ -83,10 +83,10 @@ Rscript ${BASEDIR}/bin/callPeaks.R \
 --samplesheet $SAMPLE_SHEET
 
 # creating directory to output annotated peak files
-mkdir -p ${BASEDIR}/results/annotated_peaks
+mkdir -p ${OUTDIR}/annotated_peaks
 
 # annotating peaks
-Rscript ${BASEDIR}/bin/peakAnno.R \
+Rscript ${BASEDIR}/bin/annoPeaks.R \
 --outdir $OUTDIR \
 --upstream $UPSTREAM \
 --downstream $DOWNSTREAM

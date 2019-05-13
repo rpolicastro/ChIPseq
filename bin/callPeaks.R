@@ -22,16 +22,16 @@ call.peaks <- function(row) {
 		"macs2 callpeak",
 		"-t", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
 		"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
-		"-o", file.path(opt$outdir, "peaks"),
+		"--outdir", file.path(opt$outdir, "peaks"),
 		"-g 2913022398"
 	)
 	if (!is.na(row["R2"])) {
-		command <- paste(command, "-f BAMPE") {
+		command <- paste(command, "-f BAMPE")
 	} else {
 		command <- paste(command, "-f BAM")
 	}
 
-	if (!is.na(row["control_ID")) {
+	if (!is.na(row["control_ID"])) {
 		command <- paste(command, "-c", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".bam")))
 	}
 	
@@ -41,5 +41,5 @@ call.peaks <- function(row) {
 ## call peaks
 ## ----------
 
-sample.sheet <- read.table(opt$samplesheet, header=T, sep="\t")
-apply(sample.sheet, 1, call.peaks())
+sample.sheet <- read.table(opt$samplesheet, header=TRUE, sep="\t", stringsAsFactors=FALSE)
+apply(sample.sheet, 1, call.peaks)
