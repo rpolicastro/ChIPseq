@@ -59,16 +59,17 @@ Rscript ${BASEDIR}/bin/alignReads.R \
 --outdir ${OUTDIR}/aligned \
 --seqdir $SEQDIR \
 --threads $CORES \
---samplesheet $SAMPLE_SHEET
+--samplesheet $SAMPLE_SHEET \
+--genomedir ${OUTDIR}/genome/index/hg38
 
 # converting to coordinate sorted bam with index
-for SAM in ${BASEDIR}/results/aligned/*sam; do
+for SAM in ${OUTDIR}/aligned/*sam; do
 	samtools sort \
 	-O BAM -@ $CORES \
-	-o ${BASEDIR}/results/aligned/$(basename $SAM .sam).bam \
+	-o ${OUTDIR}/aligned/$(basename $SAM .sam).bam \
 	$SAM
 done
-for BAM in ${BASEDIR}/results/aligned/*bam; do samtools index $BAM; done
+for BAM in ${OUTDIR}/aligned/*bam; do samtools index $BAM; done
 
 ## peak calling and annotation
 ## ---------------------------
