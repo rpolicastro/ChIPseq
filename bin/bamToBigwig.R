@@ -4,26 +4,25 @@ library("getopt")
 
 ## command line options
 
-option.list <- list(
-	make_option(c("-o", "--outdir"), actions="store", type="character", default=getwd(), help="output directory"),
-	make_option(c("-s", "--samplesheet"), actions="store", type="character", help="directory and name of sample sheet"),
-	make_option(c("-t", "--threads"), actions="store", type="numeric", default=1, help="number of CPU cores/threads")
-)
+options <- matrix(c(
+	"outdir", "d", 1, "character", "output directory",
+	"samplesheet", "s", 1, "character", "required sample sheet",
+	"threads", "t", 1, "integer", "number of CPU cores"
+), byrow=TRUE, ncol=5)
 
-opt_parser  <-  OptionParser(option_list=option_list)
-opt         <-  parse_args(opt_parser)
+opt <- getopt(options)
 
 ## functions
 
 bam.to.bigwig <- function(row) {
 	command <- paste(
 		"bamCoverage",
-		"-b", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam"),
-		"-o", file.path(opt$outdir, "results", "bigwigs", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bigwig"))
-		"-of bigwig -bs 1 --effectiveGenomeSize 2913022398 --normalizeUsing RPGC",
+		"-b", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
+		"-o", file.path(opt$outdir, "bigwigs", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bigwig")),
+		"-of bigwig -bs 1 --normalizeUsing CPM",
 		"-p", opt$threads
 	)
-	if (row["paired"] == "paired") {
+	if (!is.na(row["R2"])) {
 		command <- paste(command, "-e")
 	} else {
 		command <- paste(command, "-e 200")
@@ -33,5 +32,5 @@ bam.to.bigwig <- function(row) {
 
 ## bigwigs to bams
 
-sample.sheet <- read.delim(opt$samplesheet, sep="\t", header=TRUE)
-apply(sample.sheet, 1, bam.to.bigwig())
+sample.sheet <- read.delim(opt$samplesheet, sep="\t", header=TRUE, stringsAsFactors=FALSE)
+apply(sample.sheet, 1, bam.to.bigwig)

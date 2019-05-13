@@ -98,5 +98,7 @@ Rscript ${BASEDIR}/bin/annoPeaks.R \
 mkdir -p ${OUTDIR}/bigwigs
 
 # converting bams to bigwigs
-Rscript ${BASEDIR}/bin/bamToBigwig.R --outdir $OUTDIR
-
+Rscript ${BASEDIR}/bin/bamToBigwig.R \
+--outdir $OUTDIR \
+--threads $CORES \
+--samplesheet $SAMPLE_SHEET
