@@ -96,3 +96,5 @@ This workflow would not be possible without the great software listed below.
 - [deepTools](https://deeptools.readthedocs.io/en/develop/) - Read normalization and heatmap generation.
 - [ChIPseeker](http://bioconductor.org/packages/release/bioc/html/ChIPseeker.html) - Peak annotation.
 - [Tidyverse](https://www.tidyverse.org/) - Data manipulation and visualization in R.
+- [rtracklayer](http://bioconductor.org/packages/release/bioc/html/rtracklayer.html) - Easy genomic file manipulation.
+- [GenomicRanges](https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html) - Robust data structure for genomics data.
