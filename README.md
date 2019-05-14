@@ -55,9 +55,9 @@ In order to keep track of samples, this workflow requires the creation of a samp
 | replicate | Sample replicate number (e.g. 1). |
 | R1 | Name of R1 fastq file of experimental condition. |
 | R2 | Name of R2 fastq file of experimental condition (leave blank if single end). |
-| control_ID | Name of input/control sample (e.g. KD_input_1). |
+| control_ID | Name of input/control sample (e.g. KD_input_1) (leave blank if there is no input/control). |
 | R1_control | Name of R1 fastq of input/control (leave blank if there is no input/control). |
-| R2_control | Name of R2 fastq of input/control (leave blank if single end). |
+| R2_control | Name of R2 fastq of input/control (leave blank if input/control is single end). |
 
 After creating the sample sheet, set the path and file name in the 'settings.conf' file.
 
