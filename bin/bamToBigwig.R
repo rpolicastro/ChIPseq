@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 library("getopt")
+library("dplyr")
 
 ## command line options
 
@@ -30,7 +31,27 @@ bam.to.bigwig <- function(row) {
 	system(command)
 }
 
+control.bam.to.bigwig <- function(row) {
+	command <- paste(
+		"bamCoverage",
+		"-b", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".bam")),
+		"-o", file.path(opt$outdir, "bigwigs", paste0(row["control_ID"], ".bigwig")),
+		"-of bigwig -bs 1 --normalizeUsing CPM",
+		"-p", opt$threads
+	)
+	if (!is.na(row["R2_control"])) {
+		command <- paste(command, "-e")
+	} else {
+		command <- paste(command, "-e 200")
+	}
+	system(command)
+}
+
 ## bigwigs to bams
 
 sample.sheet <- read.delim(opt$samplesheet, sep="\t", header=TRUE, stringsAsFactors=FALSE)
 apply(sample.sheet, 1, bam.to.bigwig)
+
+# dealing with control samples
+controls <- sample.sheet %>% distinct(control_ID, R1_control, R2_control)
+if (nrow(controls) > 0) { apply(controls, 1, control.bam.to.bigwig) }
