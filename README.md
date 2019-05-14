@@ -13,13 +13,22 @@ To get started, you must first clone the ChIPseq automation repository. Navigate
 
 ## Preparing Conda Environment
 
-This workflow takes advantage of the [conda](https://conda.io/en/latest/) package manager and virtual environment. The conda package manager installs both the main software and all dependencies into a 'virtual environment' to ensure compatabilty.
+This workflow takes advantage of the [conda](https://conda.io/en/latest/) package manager and virtual environment. The conda package manager installs both the main software and all dependencies into a 'virtual environment' to ensure compatabilty. Additionally, the provided 'environments.yml' file can be used to install the same major software versions as used to develop the script, ensuring prolonged compatability and reproducibility.
 
 Before creating the environment, you must first install miniconda.
 1. [Install miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html?highlight=conda), and make sure that conda is in your PATH.
 2. Update conda to the latest version `conda update -n base -c defaults conda`.
 
-You are now ready to create the virtual sofware environment, and download all software and dependencies.
+You are now ready to create the virtual sofware environment, and download all software and dependencies. It is recommended to reproduce the environment used when creating the script, but instructions on installing the latest software are provided as an alternative.
+
+### Reproducing the Development Environment
+
+To install the major software versions used when developing this script, navigate to the 'examples' directory, and use the provided 'environments.yml' file to create your conda environment.
+```
+codna env create -f environment.yml
+```
+
+### Installing The Latest Software Versions
 
 1. Create the new environment and specify the software to include in it.
 ```
