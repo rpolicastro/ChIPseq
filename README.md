@@ -21,14 +21,14 @@ Before creating the environment, you must first install miniconda.
 
 You are now ready to create the virtual sofware environment, and download all software and dependencies. It is recommended to reproduce the environment used when creating the script, but instructions on installing the latest software are provided as an alternative.
 
-### Reproducing the Development Environment
+#### Reproducing the Development Environment
 
 To install the major software versions used when developing this script, navigate to the 'examples' directory, and use the provided 'environments.yml' file to create your conda environment.
 ```
-codna env create -f environment.yml
+conda env create -f environment.yml
 ```
 
-### Installing The Latest Software Versions
+#### Installing The Latest Software Versions
 
 1. Create the new environment and specify the software to include in it.
 ```
@@ -46,7 +46,7 @@ If you wish to use any of the software in the environment outside of the workflo
 
 ## Creating Sample Sheet
 
-In order to keep track of samples, this workflow requires the creation of a sample sheet. An example sheet 'samples.txt' is provided in the main repository directory. It is important to follow exact formatting of this sheet, as the information within it is used in various stages of the workflow.
+In order to keep track of samples, this workflow requires the creation of a sample sheet. An example sheet 'samples.txt' is provided in the 'DOCS' repository directory. It is important to follow exact formatting of this sheet, as the information within it is used in various stages of the workflow.
 
 | Column | Description |
 | ------ | ----------- |
@@ -56,14 +56,14 @@ In order to keep track of samples, this workflow requires the creation of a samp
 | R1 | Name of R1 fastq file of experimental condition. |
 | R2 | Name of R2 fastq file of experimental condition (leave blank if single end). |
 | control_ID | Name of input/control sample (e.g. KD_input_1). |
-| R1_control | Name of R1 fastq of input/control. |
+| R1_control | Name of R1 fastq of input/control (leave blank if there is no input/control). |
 | R2_control | Name of R2 fastq of input/control (leave blank if single end). |
 
 After creating the sample sheet, set the path and file name in the 'settings.conf' file.
 
 ## Specifying Run Settings
 
-The last step is to set a few settings in the 'settings.conf' file in the main repository directory.
+The last step is to set a few settings in the 'settings.conf' file in the main repository directory. An example settings file is provided in the 'DOCS' directory of the repository.
 
 | Setting | Description |
 | ------- | ----------- |
