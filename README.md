@@ -27,7 +27,7 @@ To install the major software versions used when developing this script, navigat
 ```
 conda env create -f environment.yml
 ```
-
+For posterity, *all* software and versions used when developing the script are provided in the 'development_environment.yml' file located in the 'DOCS' directory for the repository. 
 #### Installing The Latest Software Versions
 
 1. Create the new environment and specify the software to include in it.
