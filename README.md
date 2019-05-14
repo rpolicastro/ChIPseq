@@ -88,6 +88,7 @@ If you wish to submit the workflow to a compute node, you can do so by submittin
 
 This workflow would not be possible without the great software listed below.
 
+- [Anaconda](https://www.anaconda.com/) - Software package manager and virtual environment.
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) - Read quality control.
 - [Bowtie 2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) - Short read aligner.
 - [Samtools](http://www.htslib.org/) - SAM/BAM manipulation.
