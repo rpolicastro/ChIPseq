@@ -9,7 +9,7 @@ This repository will use software in a conda virtual environment to process mult
 
 ## Cloning Repository
 
-To get started, you must first clone the ChIPseq automation repository. Navigate to a directory you would like to clone the rep to and enter `git clone https://github.com/rpolicastro/ChIPseq.git`.
+To get started, you must first clone the ChIPseq automation repository. Navigate to a directory you would like to clone the repository to and enter `git clone https://github.com/rpolicastro/ChIPseq.git`.
 
 ## Preparing Conda Environment
 
@@ -27,7 +27,7 @@ To install the major software versions used when developing this script, navigat
 ```
 conda env create -f environment.yml
 ```
-For posterity, *all* software and versions used when developing the script are provided in the 'development_environment.yml' file located in the 'DOCS' directory for the repository. 
+For posterity, *all* software and versions used when developing the script are provided in the 'development_environment.yml' file located in the 'DOCS' directory for the repository. This file can *not* be used to install the environment on your computer, because many of the packages are system specific. However, this file may help you troubleshoot any dependencies that may occur in your environment.
 #### Installing The Latest Software Versions
 
 1. Create the new environment and specify the software to include in it.
