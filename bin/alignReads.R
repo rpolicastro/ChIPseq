@@ -67,7 +67,9 @@ align.control <- function(row) {
 
 sample.sheet <- read.table(opt$samplesheet, sep="\t", header=T, stringsAsFactors=FALSE)
 apply(sample.sheet, 1, align.experimental)
-unique.controls <- sample.sheet %>%
-	select(control_ID, R1_control, R2_control) %>%
-	distinct(control_ID, .keep_all=TRUE)
-apply(unique.controls, 1, align.control)
+
+# aligning control samples also
+if ((sample.sheet %>% filter(!is.na(control_ID)) %>% nrow) > 0) {
+	unique.controls <- sample.sheet %>% distinct(control_ID, .keep_all=TRUE)
+	apply(unique.controls, 1, align.control)
+}

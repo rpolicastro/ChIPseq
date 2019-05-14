@@ -53,5 +53,7 @@ sample.sheet <- read.delim(opt$samplesheet, sep="\t", header=TRUE, stringsAsFact
 apply(sample.sheet, 1, bam.to.bigwig)
 
 # dealing with control samples
-controls <- sample.sheet %>% distinct(control_ID, R1_control, R2_control)
-if (nrow(controls) > 0) { apply(controls, 1, control.bam.to.bigwig) }
+if ((sample.sheet %>% filter(!is.na(control_ID)) %>% nrow) > 0) {
+	controls <- sample.sheet %>% distinct(control_ID, .keep_all=TRUE)
+	apply(controls, 1, control.bam.to.bigwig)
+}
