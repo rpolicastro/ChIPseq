@@ -59,7 +59,7 @@ Rscript ${BASEDIR}/bin/alignReads.R \
 --outdir $OUTDIR \
 --seqdir $SEQDIR \
 --threads $CORES \
---samplesheet $SAMPLE_SHEET \
+--samplesheet $SAMPLE_SHEET
 
 # converting to coordinate sorted bam with index
 for SAM in ${OUTDIR}/aligned/*sam; do

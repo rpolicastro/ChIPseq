@@ -30,6 +30,7 @@ txdb <- makeTxDbFromGFF(opt$genomegtf)
 
 # go through each narrowpeaks file and annotate the peaks
 for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak")) {
+	file <- file.path(opt$outdir, "peaks", file)
 	# importing narrowpeaks as GRanges object
 	peaks <- import(file, format="BED", extraCols=extraCols_narrowPeak)
 	# ChIPseeker to anntoate peaks using hg38 TxDB and OrgDb objects

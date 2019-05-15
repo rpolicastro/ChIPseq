@@ -35,7 +35,7 @@ For posterity, *all* software and versions used when developing the script are p
 conda create -n chipseq-automation -y -c conda-forge -c bioconda \
 fastqc bowtie2 samtools macs2 deeptools bedtools sra-tools r-tidyverse r-getopt \
 bioconductor-chipseeker bioconductor-rtracklayer bioconductor-genomicranges \
-bioconductor-org.hs.eg.db bioconductor-txdb.hsapiens.ucsc.hg38.knowngene
+bioconductor-genomicfeatures
 ```
 2. Update the software to the latest compatible versions.
 ```
@@ -101,3 +101,4 @@ This workflow would not be possible without the great software listed below.
 - [Tidyverse](https://www.tidyverse.org/) - Data manipulation and visualization in R.
 - [rtracklayer](http://bioconductor.org/packages/release/bioc/html/rtracklayer.html) - Easy genomic file manipulation.
 - [GenomicRanges](https://bioconductor.org/packages/release/bioc/html/GenomicRanges.html) - Robust data structure for genomics data.
+- [GenomicFeatures](https://bioconductor.org/packages/release/bioc/html/GenomicFeatures.html) - Working with genomic annotation files.
