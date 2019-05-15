@@ -49,7 +49,7 @@ mkdir -p ${OUTDIR}/genome/index
 bowtie2-build \
 -f --threads $CORES \
 $GENOME_FASTA \
-${OUTDIR}/genome/index/hg38
+${OUTDIR}/genome/index/genome
 
 # create directory to output alignments
 mkdir -p ${OUTDIR}/aligned
@@ -80,7 +80,8 @@ mkdir -p ${OUTDIR}/peaks
 Rscript ${BASEDIR}/bin/callPeaks.R \
 --outdir $OUTDIR \
 --threads $CORES \
---samplesheet $SAMPLE_SHEET
+--samplesheet $SAMPLE_SHEET \
+--genomesize $GENOME_SIZE
 
 # creating directory to output annotated peak files
 mkdir -p ${OUTDIR}/annotated_peaks
@@ -89,7 +90,8 @@ mkdir -p ${OUTDIR}/annotated_peaks
 Rscript ${BASEDIR}/bin/annoPeaks.R \
 --outdir $OUTDIR \
 --upstream $UPSTREAM \
---downstream $DOWNSTREAM
+--downstream $DOWNSTREAM \
+--genomegtf $GENOME_GTF
 
 ## bam to bigwig
 ## -------------

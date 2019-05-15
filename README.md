@@ -67,13 +67,15 @@ The last step is to set a few settings in the 'settings.conf' file in the main r
 
 | Setting | Description |
 | ------- | ----------- |
-| BASEDIR | The directory for the ChIPseq repository. |
-| OUTDIR | The output directory for the workflow results. |
-| CORES | The number of CPU cores/threads. |
+| BASEDIR | The directory for the ChIPseq repository (e.g. /analysis/ChIPseq). |
+| OUTDIR | The output directory for the workflow results (e.g. /analysis/results). |
+| CORES | The number of CPU cores/threads (e.g. 2). |
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
 | DOWNLOAD | Whether the files need to be downloaded from SRA (e.g.'TRUE'). |
 | SEQDIR | The directory containing the fastq files. |
-| GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome.fasta) |
+| GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome/genome.fasta) |
+| GENOME_GTF | The directory and name of the genome annotation GTF/GFF (e.g. /analysis/genome/genes.gtf) |
+| GENOME_SIZE | Effective genome size (e.g. hg38 is ~3000000000) |
 | UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000) |
 | DOWNSTREAM | Bases downstream of TSS for defining promoter (e.g. 1000) |
 

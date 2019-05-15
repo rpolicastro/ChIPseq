@@ -22,7 +22,7 @@ align.experimental <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-x", file.path(opt$outdir, "genome", "index", "genome"),
 		"-S", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
@@ -44,7 +44,7 @@ align.control <- function(row) {
 	# getting command ready
 	command <- paste(
 		"bowtie2",
-		"-x", file.path(opt$outdir, "genome", "index", "hg38"),
+		"-x", file.path(opt$outdir, "genome", "index", "genome"),
 		"-S", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".sam")),
 		"-q --phred33 --no-unal --threads", opt$threads
 	)

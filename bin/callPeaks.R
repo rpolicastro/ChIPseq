@@ -9,7 +9,8 @@ library("dplyr")
 options <- matrix(c(
 	"outdir", "o", 1, "character", "output directory",
 	"threads", "t", 1, "integer", "number of CPU cores",
-	"samplesheet", "s", 1, "character", "required sample sheet"
+	"samplesheet", "s", 1, "character", "required sample sheet",
+	"genomesize", "g", 1, "integer", "effective genome size"
 ), byrow=TRUE, ncol=5)
 
 opt <- getopt(options)
@@ -23,7 +24,7 @@ call.peaks <- function(row) {
 		"-t", file.path(opt$outdir, "aligned", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"], ".bam")),
 		"-n", paste0(row["sample_ID"], "_", row["condition"], "_", row["replicate"]),
 		"--outdir", file.path(opt$outdir, "peaks"),
-		"-g 2913022398"
+		"-g", opt$genomesize
 	)
 	if (!is.na(row["R2"])) {
 		command <- paste(command, "-f BAMPE")

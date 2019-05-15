@@ -4,8 +4,7 @@ library("getopt")
 library("GenomicRanges")
 library("ChIPseeker")
 library("rtracklayer")
-library("org.Hs.eg.db")
-library("TxDb.Hsapiens.UCSC.hg38.knownGene")
+library("GenomicFeatures")
 library("dplyr")
 
 ## command line arguments
@@ -13,6 +12,7 @@ library("dplyr")
 
 options <- matrix(c(
 	"outdir", "o", 1, "character", "output directory",
+	"genomegtf", "a", 1, "character", "directory and file name of genomic GTF/GFF",
 	"upstream", "u", 1, "integer", "bases upstream of TSS to consider as promoter",
 	"downstream", "d", 1, "integer", "bases downstream of TSS to consider as promoter"
 ), byrow=TRUE, ncol=5)
@@ -25,6 +25,9 @@ opt <- getopt(options)
 # ensure the extra columns in the macs2 narrowpeaks are carried over
 extraCols_narrowPeak  <-  c(signal.value = "numeric", p.value.negLog10 = "numeric", q.value.negLog10 = "numeric", peak = "integer")
 
+# load GTF/GFF file as TxDb object
+txdb <- makeTxDbFromGFF(opt$genomegtf)
+
 # go through each narrowpeaks file and annotate the peaks
 for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak")) {
 	# importing narrowpeaks as GRanges object
@@ -33,17 +36,16 @@ for (file in list.files(file.path(opt$outdir, "peaks"), pattern=".*\\.narrowPeak
 	annotated  <-  annotatePeak(
 		peaks,
 		tssRegion=c(-opt$upstream, opt$downstream),
-		TxDb=TxDb.Hsapiens.UCSC.hg38.knownGene,
+		TxDb=txdb,
 		level="transcript",
-		sameStrand=FALSE,
-		annoDb="org.Hs.eg.db"
+		sameStrand=FALSE
 	)
 	
 	# exporting some of the handy ChIPseeker graphs
 	pdf(file.path(opt$outdir, "annotated_peaks", paste0(tools::file_path_sans_ext(basename(file)), ".pdf")))
-	plotAnnoPie(annotated)
-	plotAnnoBar(annotated)
-	plotDistToTSS(annotated)
+	print(plotAnnoPie(annotated))
+	print(plotAnnoBar(annotated))
+	print(plotDistToTSS(annotated))
 	dev.off()
 
 	# writing annotated peaks to tsv
