@@ -23,7 +23,7 @@ You are now ready to create the virtual sofware environment, and download all so
 
 #### Reproducing the Development Environment
 
-To install the major software versions used when developing this script, navigate to the 'examples' directory, and use the provided 'environments.yml' file to create your conda environment.
+To install the major software versions used when developing this script, navigate to the 'DOCS' directory, and use the provided 'environments.yml' file to create your conda environment.
 ```
 conda env create -f environment.yml
 ```
@@ -73,11 +73,11 @@ The last step is to set a few settings in the 'settings.conf' file in the main r
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
 | DOWNLOAD | Whether the files need to be downloaded from SRA (e.g.'TRUE'). |
 | SEQDIR | The directory containing the fastq files. |
-| GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome/genome.fasta) |
-| GENOME_GTF | The directory and name of the genome annotation GTF/GFF (e.g. /analysis/genome/genes.gtf) |
-| GENOME_SIZE | Effective genome size (e.g. hg38 is ~3000000000) |
-| UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000) |
-| DOWNSTREAM | Bases downstream of TSS for defining promoter (e.g. 1000) |
+| GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome/genome.fasta). |
+| GENOME_GTF | The directory and name of the genome annotation GTF/GFF (e.g. /analysis/genome/genes.gtf). |
+| GENOME_SIZE | Effective genome size (e.g. hg38 is ~3000000000). |
+| UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000. |
+| DOWNSTREAM | Bases downstream of TSS for defining promoter (e.g. 1000). |
 
 ## Running the Workflow
 
