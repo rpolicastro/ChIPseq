@@ -21,13 +21,14 @@ Before creating the environment, you must first install miniconda.
 
 You are now ready to create the virtual sofware environment, and download all software and dependencies. It is recommended to reproduce the environment used when creating the script, but instructions on installing the latest software are provided as an alternative.
 
-#### Reproducing the Development Environment
+#### Reproducing the Development Environment (Recommended)
 
 To install the major software versions used when developing this script, navigate to the 'DOCS' directory, and use the provided 'environments.yml' file to create your conda environment.
 ```
 conda env create -f environment.yml
 ```
 For posterity, *all* software and versions used when developing the script are provided in the 'development_environment.yml' file located in the 'DOCS' directory for the repository. This file can *not* be used to install the environment on your computer, because many of the dependencies and software builds are system specific. However, this file may help you troubleshoot any dependency errors that may occur in your environment.
+
 #### Installing The Latest Software Versions
 
 1. Create the new environment and specify the software to include in it.
@@ -72,11 +73,11 @@ The last step is to set a few settings in the 'settings.conf' file in the main r
 | CORES | The number of CPU cores/threads (e.g. 2). |
 | SAMPLE_SHEET | The directory and name of the sample sheet (e.g. /analysis/samples.tsv). |
 | DOWNLOAD | Whether the files need to be downloaded from SRA (e.g.'TRUE'). |
-| SEQDIR | The directory containing the fastq files. |
+| SEQDIR | The directory containing the fastq files (e.g. /analysis/sequences). |
 | GENOME_FASTA | The directory and name of the genome assembly fasta (e.g. /analysis/genome/genome.fasta). |
 | GENOME_GTF | The directory and name of the genome annotation GTF/GFF (e.g. /analysis/genome/genes.gtf). |
 | GENOME_SIZE | Effective genome size (e.g. hg38 is ~3000000000). |
-| UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000. |
+| UPSTREAM | Bases upstream of TSS for defining promoter (e.g. 1000). |
 | DOWNSTREAM | Bases downstream of TSS for defining promoter (e.g. 1000). |
 
 ## Running the Workflow
