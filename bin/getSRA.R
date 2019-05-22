@@ -55,5 +55,5 @@ if (opt$download == "TRUE") {
 	
 	# downloading files
 	setwd(opt$seqdir)
-	apply(samples, 1, grab.sra())
+	apply(samples, 1, grab.sra)
 }
