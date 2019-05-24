@@ -23,7 +23,7 @@ bam.to.bigwig <- function(row) {
 		"-of bigwig -bs 1 --normalizeUsing CPM",
 		"-p", opt$threads
 	)
-	if (!is.na(row["R2"])) {
+	if (!is.na(row["R2"]) & row["R2"] != "") {
 		command <- paste(command, "-e")
 	} else {
 		command <- paste(command, "-e 200")
@@ -39,7 +39,7 @@ control.bam.to.bigwig <- function(row) {
 		"-of bigwig -bs 1 --normalizeUsing CPM",
 		"-p", opt$threads
 	)
-	if (!is.na(row["R2_control"])) {
+	if (!is.na(row["R2_control"]) & row["R2_control"] != "") {
 		command <- paste(command, "-e")
 	} else {
 		command <- paste(command, "-e 200")
@@ -53,7 +53,7 @@ sample.sheet <- read.delim(opt$samplesheet, sep="\t", header=TRUE, stringsAsFact
 apply(sample.sheet, 1, bam.to.bigwig)
 
 # dealing with control samples
-if ((sample.sheet %>% filter(!is.na(control_ID)) %>% nrow) > 0) {
+if ((sample.sheet %>% filter(!is.na(control_ID) & control_ID != "") %>% nrow) > 0) {
 	controls <- sample.sheet %>% distinct(control_ID, .keep_all=TRUE)
 	apply(controls, 1, control.bam.to.bigwig)
 }

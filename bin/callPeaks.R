@@ -26,13 +26,13 @@ call.peaks <- function(row) {
 		"--outdir", file.path(opt$outdir, "peaks"),
 		"-g", opt$genomesize
 	)
-	if (!is.na(row["R2"])) {
+	if (!is.na(row["R2"]) & row["R2"] != "") {
 		command <- paste(command, "-f BAMPE")
 	} else {
 		command <- paste(command, "-f BAM")
 	}
 
-	if (!is.na(row["control_ID"])) {
+	if (!is.na(row["control_ID"]) & row["control_ID"] != "") {
 		command <- paste(command, "-c", file.path(opt$outdir, "aligned", paste0(row["control_ID"], ".bam")))
 	}
 	

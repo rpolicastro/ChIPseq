@@ -27,7 +27,7 @@ align.experimental <- function(row) {
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options
-	if (!is.na(row["R2"])) {
+	if (!is.na(row["R2"]) & row["R2"] != "") {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1"]),
 			"-2", file.path(opt$seqdir, row["R2"]),
@@ -49,7 +49,7 @@ align.control <- function(row) {
 		"-q --phred33 --no-unal --threads", opt$threads
 	)
 	# adding paired versus unpaired options
-	if (!is.na(row["R2_control"])) {
+	if (!is.na(row["R2_control"]) & row["R2_control"] != "") {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1_control"]),
 			"-2", file.path(opt$seqdir, row["R2_control"]),
