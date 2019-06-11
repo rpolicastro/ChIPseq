@@ -10,7 +10,26 @@ source settings.conf
 ## loading conda environment
 ## -------------------------
 
+# download singularity container with conda environment
+mkdir -p ${OUTDIR}/container && \
+cd ${OUTDIR}/container && \
+singularity pull shub://rpolicastro/ChIPseq
+
+# activate singularity container
+singularity shell \
+-e -C \
+-B $OUTDIR, \
+$BASEDIR, \
+$SEQDIR, \
+$(dirname $GENOME_GTF), \
+$(dirname $GENOME_FASTA) \
+${OUTDIR}/container/ChIPseq_latest.sif
+
+# activate chipseq-automation conda environment from within container
 source activate chipseq-automation
+
+# go back to working direcotry
+cd $BASEDIR
 
 ## download files from SRA if necessary
 ## ------------------------------------
