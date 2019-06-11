@@ -9,10 +9,14 @@ source settings.conf
 ## loading conda environment
 ## -------------------------
 
-# download singularity container with conda environment
-mkdir -p ${OUTDIR}/container && \
-cd ${OUTDIR}/container && \
+# make important directories
+mkdir -p $OUTDIR
+mkdir -p $SEQDIR
+
+# download singularity container that contains conda environment
+mkdir -p ${OUTDIR}/container && cd ${OUTDIR}/container
 singularity pull shub://rpolicastro/ChIPseq
+cd $BASEDIR
 
 # activate singularity container
 singularity shell \
@@ -27,14 +31,11 @@ ${OUTDIR}/container/ChIPseq_latest.sif
 # activate chipseq-automation conda environment from within container
 source activate chipseq-automation
 
-# go back to working direcotry
+# shelling into container brings you back to root fo container, so go back to script directory
 cd $BASEDIR
 
 ## download files from SRA if necessary
 ## ------------------------------------
-
-# creating sequence directory
-mkdir -p $SEQDIR
 
 # downloading from SRA if necessary
 Rscript ${BASEDIR}/bin/getSRA.R \
