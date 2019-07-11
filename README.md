@@ -9,7 +9,7 @@ This repository will use software in a conda virtual environment to process mult
 
 ## Cloning Repository
 
-To get started, you must first clone the ChIPseq automation repository. Navigate to a directory you would like to clone the repository to and enter `git clone https://github.com/rpolicastro/ChIPseq.git`.
+To get started, you must first clone the ChIPseq automation repository. Navigate to a directory you would like to clone the repository to and enter `git clone https://github.com/zentnerlab/ChIPseq.git`.
 
 ## Preparing Conda Environment
 
