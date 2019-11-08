@@ -22,7 +22,8 @@ mkdir -p $SEQDIR
 Rscript ${BASEDIR}/bin/getSRA.R \
 --download $DOWNLOAD \
 --samplesheet $SAMPLE_SHEET \
---seqdir $SEQDIR
+--seqdir $SEQDIR \
+--threads $CORES
 
 ## fastqc of reads
 ## ---------------
