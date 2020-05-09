@@ -9,7 +9,8 @@ library("tidyverse")
 options <- matrix(c(
 	"download", "d", 1, "character", "download files from SRA? [TRUE,FALSE]",
 	"samplesheet", "i", 1, "character", "required sample sheet",
-	"seqdir", "o", 1, "character", "directory to download fastq files to"
+	"seqdir", "o", 1, "character", "directory to download fastq files to",
+	"threads", "t", 1, "integer", "number of CPU cores"
 ), byrow=TRUE, ncol=5)
 
 opt <- getopt(options)
@@ -21,11 +22,11 @@ grab.sra <- function(row) {
 	# download R1 and split file if paired end
 	if (!is.na(row["R2"]) & row["R2"] != "") {
 		sra.id <- row["R1"] %>% substr(., 1, nchar(.)-8)
-		command <- paste("fastq-dump", "--split-files", sra.id)
+		command <- paste("fasterq-dump", "--split-files", "-e", opt$threads, sra.id)
 		system(command)
 	} else {
 		sra.id <- row["R1"] %>% substr(., 1, nchar(.)-6)
-		command <- paste("fastq-dump", sra.id)
+		command <- paste("fasterq-dump", "-e", opt$threads, sra.id)
 		system(command)
 	}
 }
@@ -34,11 +35,11 @@ grab.sra.controls <- function(row) {
 	# download controls if they exist and split file if paired end
 	if (!is.na(row["R2_control"]) & row["R2_control"] != "") {
 		sra.id <- row["R1_control"] %>% substr(., 1, nchar(.)-8)
-		command <- paste("fastq-dump", "--split-files", sra.id)
+		command <- paste("fasterq-dump", "--split-files", "-e", opt$threads, sra.id)
 		system(command)
 	} else {
 		sra.id <- row["R1_control"] %>% substr(., 1, nchar(.)-6)
-		command <- paste("fastq-dump", sra.id)
+		command <- paste("fasterq-dump", "-e", opt$threads, sra.id)
 		system(command)
 	}
 }

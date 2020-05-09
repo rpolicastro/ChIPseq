@@ -31,7 +31,7 @@ align.experimental <- function(row) {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1"]),
 			"-2", file.path(opt$seqdir, row["R2"]),
-			"--no-mixed --no-discordant"
+			"--no-mixed --no-discordant --dovetail -I 10 -X 700"
 		)
 	} else {
 		command <- paste(command, "-U", file.path(opt$seqdir, row["R1"]))
@@ -53,7 +53,7 @@ align.control <- function(row) {
 		command <- paste(command,
 			"-1", file.path(opt$seqdir, row["R1_control"]),
 			"-2", file.path(opt$seqdir, row["R2_control"]),
-			"--no-mixed --no-discordant"
+			"--no-mixed --no-discordant --dovetail -I 10 -X 700"
 		)
 	} else {
 		command <- paste(command, "-U", file.path(opt$seqdir, row["R1_control"]))
